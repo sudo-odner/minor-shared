@@ -1,0 +1,8 @@
+version: v2
+modules:
+  - path: api/proto
+    name: buf.build/sudo-odner/minor-shared
+
+lint:
+  use:
+    - STANDARD
