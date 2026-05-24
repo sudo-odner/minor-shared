@@ -129,7 +129,7 @@ const file_user_v1_user_proto_rawDesc = "" +
 	"\x17FetchPermissionResponse\x12'\n" +
 	"\x0fpermission_mask\x18\x01 \x01(\x04R\x0epermissionMask2c\n" +
 	"\vUserService\x12T\n" +
-	"\x0fFetchPermission\x12\x1f.user.v1.FetchPermissionRequest\x1a .user.v1.FetchPermissionResponseBBZ@github.com/sudo-odner/minor/backend/shared/pkg/pb/user/v1;userv1b\x06proto3"
+	"\x0fFetchPermission\x12\x1f.user.v1.FetchPermissionRequest\x1a .user.v1.FetchPermissionResponseB:Z8github.com/sudo-odner/minor-shared/pkg/pb/user/v1;userv1b\x06proto3"
 
 var (
 	file_user_v1_user_proto_rawDescOnce sync.Once

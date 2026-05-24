@@ -24,28 +24,28 @@ const (
 type UserStatus int32
 
 const (
-	UserStatus_USER_STATUS_UNSPECIFIES UserStatus = 0
+	UserStatus_USER_STATUS_UNSPECIFIED UserStatus = 0
 	UserStatus_USER_STATUS_ONLINE      UserStatus = 1
 	UserStatus_USER_STATUS_IDLE        UserStatus = 2
 	UserStatus_USER_STATUS_DND         UserStatus = 3
-	UserStatus_USED_STATUS_OFFLINE     UserStatus = 4
+	UserStatus_USER_STATUS_OFFLINE     UserStatus = 4
 )
 
 // Enum value maps for UserStatus.
 var (
 	UserStatus_name = map[int32]string{
-		0: "USER_STATUS_UNSPECIFIES",
+		0: "USER_STATUS_UNSPECIFIED",
 		1: "USER_STATUS_ONLINE",
 		2: "USER_STATUS_IDLE",
 		3: "USER_STATUS_DND",
-		4: "USED_STATUS_OFFLINE",
+		4: "USER_STATUS_OFFLINE",
 	}
 	UserStatus_value = map[string]int32{
-		"USER_STATUS_UNSPECIFIES": 0,
+		"USER_STATUS_UNSPECIFIED": 0,
 		"USER_STATUS_ONLINE":      1,
 		"USER_STATUS_IDLE":        2,
 		"USER_STATUS_DND":         3,
-		"USED_STATUS_OFFLINE":     4,
+		"USER_STATUS_OFFLINE":     4,
 	}
 )
 
@@ -127,7 +127,7 @@ func (x *Presence) GetStatus() UserStatus {
 	if x != nil {
 		return x.Status
 	}
-	return UserStatus_USER_STATUS_UNSPECIFIES
+	return UserStatus_USER_STATUS_UNSPECIFIED
 }
 
 func (x *Presence) GetCustomStatus() string {
@@ -194,7 +194,7 @@ func (x *SetStatusRequest) GetStatus() UserStatus {
 	if x != nil {
 		return x.Status
 	}
-	return UserStatus_USER_STATUS_UNSPECIFIES
+	return UserStatus_USER_STATUS_UNSPECIFIED
 }
 
 func (x *SetStatusRequest) GetCustomStatus() string {
@@ -453,15 +453,15 @@ const file_presence_v1_presence_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\v2\x15.presence.v1.PresenceR\x05value:\x028\x01*\x85\x01\n" +
 	"\n" +
 	"UserStatus\x12\x1b\n" +
-	"\x17USER_STATUS_UNSPECIFIES\x10\x00\x12\x16\n" +
+	"\x17USER_STATUS_UNSPECIFIED\x10\x00\x12\x16\n" +
 	"\x12USER_STATUS_ONLINE\x10\x01\x12\x14\n" +
 	"\x10USER_STATUS_IDLE\x10\x02\x12\x13\n" +
 	"\x0fUSER_STATUS_DND\x10\x03\x12\x17\n" +
-	"\x13USED_STATUS_OFFLINE\x10\x042\x87\x02\n" +
+	"\x13USER_STATUS_OFFLINE\x10\x042\x87\x02\n" +
 	"\x0fPresenceService\x12J\n" +
 	"\tSetStatus\x12\x1d.presence.v1.SetStatusRequest\x1a\x1e.presence.v1.SetStatusResponse\x12J\n" +
 	"\tGetStatus\x12\x1d.presence.v1.GetStatusRequest\x1a\x1e.presence.v1.GetStatusResponse\x12\\\n" +
-	"\x0fGetUserStatuses\x12#.presence.v1.GetUserStatusesRequest\x1a$.presence.v1.GetUserStatusesResponseB1Z/minor/backend/shared/pkg/presence/v1;presencev1b\x06proto3"
+	"\x0fGetUserStatuses\x12#.presence.v1.GetUserStatusesRequest\x1a$.presence.v1.GetUserStatusesResponseBBZ@github.com/sudo-odner/minor-shared/pkg/pb/presence/v1;presencev1b\x06proto3"
 
 var (
 	file_presence_v1_presence_proto_rawDescOnce sync.Once

@@ -129,7 +129,7 @@ const file_community_v1_community_proto_rawDesc = "" +
 	"\x17FetchPermissionResponse\x12'\n" +
 	"\x0fpermission_mask\x18\x01 \x01(\x04R\x0epermissionMask2r\n" +
 	"\x10CommunityService\x12^\n" +
-	"\x0fFetchPermission\x12$.community.v1.FetchPermissionRequest\x1a%.community.v1.FetchPermissionResponseBLZJgithub.com/sudo-odner/minor/backend/shared/pkg/pb/community/v1;communityv1b\x06proto3"
+	"\x0fFetchPermission\x12$.community.v1.FetchPermissionRequest\x1a%.community.v1.FetchPermissionResponseBDZBgithub.com/sudo-odner/minor-shared/pkg/pb/community/v1;communityv1b\x06proto3"
 
 var (
 	file_community_v1_community_proto_rawDescOnce sync.Once
