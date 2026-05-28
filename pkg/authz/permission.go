@@ -35,6 +35,9 @@ const (
 
 	// PermManageChannels позволяет создавать, удалять или переименовыввать каналы
 	PermManageChannels Permission = 1 << 21
+
+	// PermManageNicknames
+	PermManageNicknames Permission = 1 << 22
 )
 
 // Проверка прав доступа по одному из критериев
