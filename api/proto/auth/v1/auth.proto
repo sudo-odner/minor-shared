@@ -14,7 +14,7 @@ message VerifyTokenRequest {
 
 message VerifyTokenResponse {
     string user_id = 1;
-    bool is_active = 2;
+    bool is_valid = 2;
     int64 expires_at = 3;
     string error_message = 4;
 }
