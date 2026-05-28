@@ -41,6 +41,9 @@ const (
 
 	// PermManageNicknames позвоялет изменять ник только себе
 	PermChangeNicknames Permission = 1 << 22
+
+	// PermManageRole позволяет управлять ролями
+	PermManageRole Permission = 1 << 23
 )
 
 // Проверка прав доступа по одному из критериев
