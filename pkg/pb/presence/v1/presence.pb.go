@@ -148,7 +148,7 @@ type SetStatusRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Status        UserStatus             `protobuf:"varint,2,opt,name=status,proto3,enum=presence.v1.UserStatus" json:"status,omitempty"`
-	CustomStatus  string                 `protobuf:"bytes,3,opt,name=custom_status,json=customStatus,proto3" json:"custom_status,omitempty"`
+	StatusInfo    string                 `protobuf:"bytes,3,opt,name=status_info,json=statusInfo,proto3" json:"status_info,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -197,9 +197,9 @@ func (x *SetStatusRequest) GetStatus() UserStatus {
 	return UserStatus_USER_STATUS_UNSPECIFIED
 }
 
-func (x *SetStatusRequest) GetCustomStatus() string {
+func (x *SetStatusRequest) GetStatusInfo() string {
 	if x != nil {
-		return x.CustomStatus
+		return x.StatusInfo
 	}
 	return ""
 }
@@ -248,94 +248,6 @@ func (x *SetStatusResponse) GetSuccess() bool {
 	return false
 }
 
-type GetStatusRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetStatusRequest) Reset() {
-	*x = GetStatusRequest{}
-	mi := &file_presence_v1_presence_proto_msgTypes[3]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetStatusRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetStatusRequest) ProtoMessage() {}
-
-func (x *GetStatusRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_presence_v1_presence_proto_msgTypes[3]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetStatusRequest.ProtoReflect.Descriptor instead.
-func (*GetStatusRequest) Descriptor() ([]byte, []int) {
-	return file_presence_v1_presence_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *GetStatusRequest) GetUserId() string {
-	if x != nil {
-		return x.UserId
-	}
-	return ""
-}
-
-type GetStatusResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Presence      *Presence              `protobuf:"bytes,1,opt,name=presence,proto3" json:"presence,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetStatusResponse) Reset() {
-	*x = GetStatusResponse{}
-	mi := &file_presence_v1_presence_proto_msgTypes[4]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetStatusResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetStatusResponse) ProtoMessage() {}
-
-func (x *GetStatusResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_presence_v1_presence_proto_msgTypes[4]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetStatusResponse.ProtoReflect.Descriptor instead.
-func (*GetStatusResponse) Descriptor() ([]byte, []int) {
-	return file_presence_v1_presence_proto_rawDescGZIP(), []int{4}
-}
-
-func (x *GetStatusResponse) GetPresence() *Presence {
-	if x != nil {
-		return x.Presence
-	}
-	return nil
-}
-
 type GetUserStatusesRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserIds       []string               `protobuf:"bytes,1,rep,name=user_ids,json=userIds,proto3" json:"user_ids,omitempty"`
@@ -345,7 +257,7 @@ type GetUserStatusesRequest struct {
 
 func (x *GetUserStatusesRequest) Reset() {
 	*x = GetUserStatusesRequest{}
-	mi := &file_presence_v1_presence_proto_msgTypes[5]
+	mi := &file_presence_v1_presence_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -357,7 +269,7 @@ func (x *GetUserStatusesRequest) String() string {
 func (*GetUserStatusesRequest) ProtoMessage() {}
 
 func (x *GetUserStatusesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_presence_v1_presence_proto_msgTypes[5]
+	mi := &file_presence_v1_presence_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -370,7 +282,7 @@ func (x *GetUserStatusesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserStatusesRequest.ProtoReflect.Descriptor instead.
 func (*GetUserStatusesRequest) Descriptor() ([]byte, []int) {
-	return file_presence_v1_presence_proto_rawDescGZIP(), []int{5}
+	return file_presence_v1_presence_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *GetUserStatusesRequest) GetUserIds() []string {
@@ -389,7 +301,7 @@ type GetUserStatusesResponse struct {
 
 func (x *GetUserStatusesResponse) Reset() {
 	*x = GetUserStatusesResponse{}
-	mi := &file_presence_v1_presence_proto_msgTypes[6]
+	mi := &file_presence_v1_presence_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -401,7 +313,7 @@ func (x *GetUserStatusesResponse) String() string {
 func (*GetUserStatusesResponse) ProtoMessage() {}
 
 func (x *GetUserStatusesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_presence_v1_presence_proto_msgTypes[6]
+	mi := &file_presence_v1_presence_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -414,7 +326,7 @@ func (x *GetUserStatusesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserStatusesResponse.ProtoReflect.Descriptor instead.
 func (*GetUserStatusesResponse) Descriptor() ([]byte, []int) {
-	return file_presence_v1_presence_proto_rawDescGZIP(), []int{6}
+	return file_presence_v1_presence_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *GetUserStatusesResponse) GetStatuses() map[string]*Presence {
@@ -433,17 +345,14 @@ const file_presence_v1_presence_proto_rawDesc = "" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12/\n" +
 	"\x06status\x18\x02 \x01(\x0e2\x17.presence.v1.UserStatusR\x06status\x12#\n" +
 	"\rcustom_status\x18\x03 \x01(\tR\fcustomStatus\x12$\n" +
-	"\x0elast_active_at\x18\x04 \x01(\x03R\flastActiveAt\"\x81\x01\n" +
+	"\x0elast_active_at\x18\x04 \x01(\x03R\flastActiveAt\"}\n" +
 	"\x10SetStatusRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12/\n" +
-	"\x06status\x18\x02 \x01(\x0e2\x17.presence.v1.UserStatusR\x06status\x12#\n" +
-	"\rcustom_status\x18\x03 \x01(\tR\fcustomStatus\"-\n" +
+	"\x06status\x18\x02 \x01(\x0e2\x17.presence.v1.UserStatusR\x06status\x12\x1f\n" +
+	"\vstatus_info\x18\x03 \x01(\tR\n" +
+	"statusInfo\"-\n" +
 	"\x11SetStatusResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\"+\n" +
-	"\x10GetStatusRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\"F\n" +
-	"\x11GetStatusResponse\x121\n" +
-	"\bpresence\x18\x01 \x01(\v2\x15.presence.v1.PresenceR\bpresence\"3\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\"3\n" +
 	"\x16GetUserStatusesRequest\x12\x19\n" +
 	"\buser_ids\x18\x01 \x03(\tR\auserIds\"\xbd\x01\n" +
 	"\x17GetUserStatusesResponse\x12N\n" +
@@ -457,10 +366,9 @@ const file_presence_v1_presence_proto_rawDesc = "" +
 	"\x12USER_STATUS_ONLINE\x10\x01\x12\x14\n" +
 	"\x10USER_STATUS_IDLE\x10\x02\x12\x13\n" +
 	"\x0fUSER_STATUS_DND\x10\x03\x12\x17\n" +
-	"\x13USER_STATUS_OFFLINE\x10\x042\x87\x02\n" +
+	"\x13USER_STATUS_OFFLINE\x10\x042\xbb\x01\n" +
 	"\x0fPresenceService\x12J\n" +
-	"\tSetStatus\x12\x1d.presence.v1.SetStatusRequest\x1a\x1e.presence.v1.SetStatusResponse\x12J\n" +
-	"\tGetStatus\x12\x1d.presence.v1.GetStatusRequest\x1a\x1e.presence.v1.GetStatusResponse\x12\\\n" +
+	"\tSetStatus\x12\x1d.presence.v1.SetStatusRequest\x1a\x1e.presence.v1.SetStatusResponse\x12\\\n" +
 	"\x0fGetUserStatuses\x12#.presence.v1.GetUserStatusesRequest\x1a$.presence.v1.GetUserStatusesResponseBBZ@github.com/sudo-odner/minor-shared/pkg/pb/presence/v1;presencev1b\x06proto3"
 
 var (
@@ -476,35 +384,30 @@ func file_presence_v1_presence_proto_rawDescGZIP() []byte {
 }
 
 var file_presence_v1_presence_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_presence_v1_presence_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_presence_v1_presence_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_presence_v1_presence_proto_goTypes = []any{
 	(UserStatus)(0),                 // 0: presence.v1.UserStatus
 	(*Presence)(nil),                // 1: presence.v1.Presence
 	(*SetStatusRequest)(nil),        // 2: presence.v1.SetStatusRequest
 	(*SetStatusResponse)(nil),       // 3: presence.v1.SetStatusResponse
-	(*GetStatusRequest)(nil),        // 4: presence.v1.GetStatusRequest
-	(*GetStatusResponse)(nil),       // 5: presence.v1.GetStatusResponse
-	(*GetUserStatusesRequest)(nil),  // 6: presence.v1.GetUserStatusesRequest
-	(*GetUserStatusesResponse)(nil), // 7: presence.v1.GetUserStatusesResponse
-	nil,                             // 8: presence.v1.GetUserStatusesResponse.StatusesEntry
+	(*GetUserStatusesRequest)(nil),  // 4: presence.v1.GetUserStatusesRequest
+	(*GetUserStatusesResponse)(nil), // 5: presence.v1.GetUserStatusesResponse
+	nil,                             // 6: presence.v1.GetUserStatusesResponse.StatusesEntry
 }
 var file_presence_v1_presence_proto_depIdxs = []int32{
 	0, // 0: presence.v1.Presence.status:type_name -> presence.v1.UserStatus
 	0, // 1: presence.v1.SetStatusRequest.status:type_name -> presence.v1.UserStatus
-	1, // 2: presence.v1.GetStatusResponse.presence:type_name -> presence.v1.Presence
-	8, // 3: presence.v1.GetUserStatusesResponse.statuses:type_name -> presence.v1.GetUserStatusesResponse.StatusesEntry
-	1, // 4: presence.v1.GetUserStatusesResponse.StatusesEntry.value:type_name -> presence.v1.Presence
-	2, // 5: presence.v1.PresenceService.SetStatus:input_type -> presence.v1.SetStatusRequest
-	4, // 6: presence.v1.PresenceService.GetStatus:input_type -> presence.v1.GetStatusRequest
-	6, // 7: presence.v1.PresenceService.GetUserStatuses:input_type -> presence.v1.GetUserStatusesRequest
-	3, // 8: presence.v1.PresenceService.SetStatus:output_type -> presence.v1.SetStatusResponse
-	5, // 9: presence.v1.PresenceService.GetStatus:output_type -> presence.v1.GetStatusResponse
-	7, // 10: presence.v1.PresenceService.GetUserStatuses:output_type -> presence.v1.GetUserStatusesResponse
-	8, // [8:11] is the sub-list for method output_type
-	5, // [5:8] is the sub-list for method input_type
-	5, // [5:5] is the sub-list for extension type_name
-	5, // [5:5] is the sub-list for extension extendee
-	0, // [0:5] is the sub-list for field type_name
+	6, // 2: presence.v1.GetUserStatusesResponse.statuses:type_name -> presence.v1.GetUserStatusesResponse.StatusesEntry
+	1, // 3: presence.v1.GetUserStatusesResponse.StatusesEntry.value:type_name -> presence.v1.Presence
+	2, // 4: presence.v1.PresenceService.SetStatus:input_type -> presence.v1.SetStatusRequest
+	4, // 5: presence.v1.PresenceService.GetUserStatuses:input_type -> presence.v1.GetUserStatusesRequest
+	3, // 6: presence.v1.PresenceService.SetStatus:output_type -> presence.v1.SetStatusResponse
+	5, // 7: presence.v1.PresenceService.GetUserStatuses:output_type -> presence.v1.GetUserStatusesResponse
+	6, // [6:8] is the sub-list for method output_type
+	4, // [4:6] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_presence_v1_presence_proto_init() }
@@ -518,7 +421,7 @@ func file_presence_v1_presence_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_presence_v1_presence_proto_rawDesc), len(file_presence_v1_presence_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   8,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

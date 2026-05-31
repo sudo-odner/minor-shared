@@ -20,7 +20,6 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	PresenceService_SetStatus_FullMethodName       = "/presence.v1.PresenceService/SetStatus"
-	PresenceService_GetStatus_FullMethodName       = "/presence.v1.PresenceService/GetStatus"
 	PresenceService_GetUserStatuses_FullMethodName = "/presence.v1.PresenceService/GetUserStatuses"
 )
 
@@ -29,7 +28,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type PresenceServiceClient interface {
 	SetStatus(ctx context.Context, in *SetStatusRequest, opts ...grpc.CallOption) (*SetStatusResponse, error)
-	GetStatus(ctx context.Context, in *GetStatusRequest, opts ...grpc.CallOption) (*GetStatusResponse, error)
+	// rpc GetStatus(GetStatusRequest) returns (GetStatusResponse);
 	GetUserStatuses(ctx context.Context, in *GetUserStatusesRequest, opts ...grpc.CallOption) (*GetUserStatusesResponse, error)
 }
 
@@ -51,16 +50,6 @@ func (c *presenceServiceClient) SetStatus(ctx context.Context, in *SetStatusRequ
 	return out, nil
 }
 
-func (c *presenceServiceClient) GetStatus(ctx context.Context, in *GetStatusRequest, opts ...grpc.CallOption) (*GetStatusResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetStatusResponse)
-	err := c.cc.Invoke(ctx, PresenceService_GetStatus_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *presenceServiceClient) GetUserStatuses(ctx context.Context, in *GetUserStatusesRequest, opts ...grpc.CallOption) (*GetUserStatusesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetUserStatusesResponse)
@@ -76,7 +65,7 @@ func (c *presenceServiceClient) GetUserStatuses(ctx context.Context, in *GetUser
 // for forward compatibility.
 type PresenceServiceServer interface {
 	SetStatus(context.Context, *SetStatusRequest) (*SetStatusResponse, error)
-	GetStatus(context.Context, *GetStatusRequest) (*GetStatusResponse, error)
+	// rpc GetStatus(GetStatusRequest) returns (GetStatusResponse);
 	GetUserStatuses(context.Context, *GetUserStatusesRequest) (*GetUserStatusesResponse, error)
 	mustEmbedUnimplementedPresenceServiceServer()
 }
@@ -90,9 +79,6 @@ type UnimplementedPresenceServiceServer struct{}
 
 func (UnimplementedPresenceServiceServer) SetStatus(context.Context, *SetStatusRequest) (*SetStatusResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method SetStatus not implemented")
-}
-func (UnimplementedPresenceServiceServer) GetStatus(context.Context, *GetStatusRequest) (*GetStatusResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetStatus not implemented")
 }
 func (UnimplementedPresenceServiceServer) GetUserStatuses(context.Context, *GetUserStatusesRequest) (*GetUserStatusesResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetUserStatuses not implemented")
@@ -136,24 +122,6 @@ func _PresenceService_SetStatus_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
-func _PresenceService_GetStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetStatusRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(PresenceServiceServer).GetStatus(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: PresenceService_GetStatus_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PresenceServiceServer).GetStatus(ctx, req.(*GetStatusRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _PresenceService_GetUserStatuses_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetUserStatusesRequest)
 	if err := dec(in); err != nil {
@@ -182,10 +150,6 @@ var PresenceService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SetStatus",
 			Handler:    _PresenceService_SetStatus_Handler,
-		},
-		{
-			MethodName: "GetStatus",
-			Handler:    _PresenceService_GetStatus_Handler,
 		},
 		{
 			MethodName: "GetUserStatuses",
