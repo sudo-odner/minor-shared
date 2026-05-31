@@ -5,7 +5,25 @@ package user.v1;
 option go_package = "github.com/sudo-odner/minor-shared/pkg/pb/user/v1;userv1";
 
 service UserService {
+  rpc GetUserName(GetUserNameRequest) returns (GetUserNameResponse);
+  rpc GetUserEmail(GetUserEmailRequest) returns (GetUserEmailResponse);
   rpc GetUserProfile(GetUserProfileRequest) returns (GetUserProfileResponse);
+}
+
+message GetUserNameRequest {
+  string user_id = 1; // UUID v7
+}
+
+message GetUserNameResponse {
+  string username = 1;
+}
+
+message GetUserEmailRequest {
+  string user_id = 1;
+}
+
+message GetUserEmailResponse {
+  string email = 1;
 }
 
 message GetUserProfileRequest {

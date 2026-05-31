@@ -19,6 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
+	UserService_GetUserName_FullMethodName    = "/user.v1.UserService/GetUserName"
+	UserService_GetUserEmail_FullMethodName   = "/user.v1.UserService/GetUserEmail"
 	UserService_GetUserProfile_FullMethodName = "/user.v1.UserService/GetUserProfile"
 )
 
@@ -26,6 +28,8 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type UserServiceClient interface {
+	GetUserName(ctx context.Context, in *GetUserNameRequest, opts ...grpc.CallOption) (*GetUserNameResponse, error)
+	GetUserEmail(ctx context.Context, in *GetUserEmailRequest, opts ...grpc.CallOption) (*GetUserEmailResponse, error)
 	GetUserProfile(ctx context.Context, in *GetUserProfileRequest, opts ...grpc.CallOption) (*GetUserProfileResponse, error)
 }
 
@@ -35,6 +39,26 @@ type userServiceClient struct {
 
 func NewUserServiceClient(cc grpc.ClientConnInterface) UserServiceClient {
 	return &userServiceClient{cc}
+}
+
+func (c *userServiceClient) GetUserName(ctx context.Context, in *GetUserNameRequest, opts ...grpc.CallOption) (*GetUserNameResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserNameResponse)
+	err := c.cc.Invoke(ctx, UserService_GetUserName_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) GetUserEmail(ctx context.Context, in *GetUserEmailRequest, opts ...grpc.CallOption) (*GetUserEmailResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserEmailResponse)
+	err := c.cc.Invoke(ctx, UserService_GetUserEmail_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *userServiceClient) GetUserProfile(ctx context.Context, in *GetUserProfileRequest, opts ...grpc.CallOption) (*GetUserProfileResponse, error) {
@@ -51,6 +75,8 @@ func (c *userServiceClient) GetUserProfile(ctx context.Context, in *GetUserProfi
 // All implementations must embed UnimplementedUserServiceServer
 // for forward compatibility.
 type UserServiceServer interface {
+	GetUserName(context.Context, *GetUserNameRequest) (*GetUserNameResponse, error)
+	GetUserEmail(context.Context, *GetUserEmailRequest) (*GetUserEmailResponse, error)
 	GetUserProfile(context.Context, *GetUserProfileRequest) (*GetUserProfileResponse, error)
 	mustEmbedUnimplementedUserServiceServer()
 }
@@ -62,6 +88,12 @@ type UserServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedUserServiceServer struct{}
 
+func (UnimplementedUserServiceServer) GetUserName(context.Context, *GetUserNameRequest) (*GetUserNameResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetUserName not implemented")
+}
+func (UnimplementedUserServiceServer) GetUserEmail(context.Context, *GetUserEmailRequest) (*GetUserEmailResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetUserEmail not implemented")
+}
 func (UnimplementedUserServiceServer) GetUserProfile(context.Context, *GetUserProfileRequest) (*GetUserProfileResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetUserProfile not implemented")
 }
@@ -84,6 +116,42 @@ func RegisterUserServiceServer(s grpc.ServiceRegistrar, srv UserServiceServer) {
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&UserService_ServiceDesc, srv)
+}
+
+func _UserService_GetUserName_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserNameRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).GetUserName(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_GetUserName_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).GetUserName(ctx, req.(*GetUserNameRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_GetUserEmail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserEmailRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).GetUserEmail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_GetUserEmail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).GetUserEmail(ctx, req.(*GetUserEmailRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _UserService_GetUserProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -111,6 +179,14 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "user.v1.UserService",
 	HandlerType: (*UserServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "GetUserName",
+			Handler:    _UserService_GetUserName_Handler,
+		},
+		{
+			MethodName: "GetUserEmail",
+			Handler:    _UserService_GetUserEmail_Handler,
+		},
 		{
 			MethodName: "GetUserProfile",
 			Handler:    _UserService_GetUserProfile_Handler,
