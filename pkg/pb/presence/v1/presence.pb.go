@@ -148,7 +148,7 @@ type SetStatusRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Status        UserStatus             `protobuf:"varint,2,opt,name=status,proto3,enum=presence.v1.UserStatus" json:"status,omitempty"`
-	StatusInfo    string                 `protobuf:"bytes,3,opt,name=status_info,json=statusInfo,proto3" json:"status_info,omitempty"`
+	CutsomStatus  string                 `protobuf:"bytes,3,opt,name=cutsom_status,json=cutsomStatus,proto3" json:"cutsom_status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -197,9 +197,9 @@ func (x *SetStatusRequest) GetStatus() UserStatus {
 	return UserStatus_USER_STATUS_UNSPECIFIED
 }
 
-func (x *SetStatusRequest) GetStatusInfo() string {
+func (x *SetStatusRequest) GetCutsomStatus() string {
 	if x != nil {
-		return x.StatusInfo
+		return x.CutsomStatus
 	}
 	return ""
 }
@@ -345,12 +345,11 @@ const file_presence_v1_presence_proto_rawDesc = "" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12/\n" +
 	"\x06status\x18\x02 \x01(\x0e2\x17.presence.v1.UserStatusR\x06status\x12#\n" +
 	"\rcustom_status\x18\x03 \x01(\tR\fcustomStatus\x12$\n" +
-	"\x0elast_active_at\x18\x04 \x01(\x03R\flastActiveAt\"}\n" +
+	"\x0elast_active_at\x18\x04 \x01(\x03R\flastActiveAt\"\x81\x01\n" +
 	"\x10SetStatusRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12/\n" +
-	"\x06status\x18\x02 \x01(\x0e2\x17.presence.v1.UserStatusR\x06status\x12\x1f\n" +
-	"\vstatus_info\x18\x03 \x01(\tR\n" +
-	"statusInfo\"-\n" +
+	"\x06status\x18\x02 \x01(\x0e2\x17.presence.v1.UserStatusR\x06status\x12#\n" +
+	"\rcutsom_status\x18\x03 \x01(\tR\fcutsomStatus\"-\n" +
 	"\x11SetStatusResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\"3\n" +
 	"\x16GetUserStatusesRequest\x12\x19\n" +
