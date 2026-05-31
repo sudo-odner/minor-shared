@@ -28,7 +28,7 @@ message Presence {
 message SetStatusRequest {
   string user_id = 1;
   UserStatus status = 2;
-  string status_info = 3;
+  string cutsom_status = 3;
 }
 
 message SetStatusResponse {
