@@ -21,28 +21,27 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type FetchPermissionRequest struct {
+type GetUserProfileRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	ChannelId     string                 `protobuf:"bytes,2,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *FetchPermissionRequest) Reset() {
-	*x = FetchPermissionRequest{}
+func (x *GetUserProfileRequest) Reset() {
+	*x = GetUserProfileRequest{}
 	mi := &file_user_v1_user_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *FetchPermissionRequest) String() string {
+func (x *GetUserProfileRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*FetchPermissionRequest) ProtoMessage() {}
+func (*GetUserProfileRequest) ProtoMessage() {}
 
-func (x *FetchPermissionRequest) ProtoReflect() protoreflect.Message {
+func (x *GetUserProfileRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_user_v1_user_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -54,46 +53,45 @@ func (x *FetchPermissionRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use FetchPermissionRequest.ProtoReflect.Descriptor instead.
-func (*FetchPermissionRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetUserProfileRequest.ProtoReflect.Descriptor instead.
+func (*GetUserProfileRequest) Descriptor() ([]byte, []int) {
 	return file_user_v1_user_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *FetchPermissionRequest) GetUserId() string {
+func (x *GetUserProfileRequest) GetUserId() string {
 	if x != nil {
 		return x.UserId
 	}
 	return ""
 }
 
-func (x *FetchPermissionRequest) GetChannelId() string {
-	if x != nil {
-		return x.ChannelId
-	}
-	return ""
+type GetUserProfileResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Email         string                 `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
+	Username      string                 `protobuf:"bytes,3,opt,name=username,proto3" json:"username,omitempty"`
+	AvatarUrl     string                 `protobuf:"bytes,4,opt,name=avatar_url,json=avatarUrl,proto3" json:"avatar_url,omitempty"`
+	Bio           string                 `protobuf:"bytes,5,opt,name=bio,proto3" json:"bio,omitempty"`
+	CreatedAt     string                 `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt     string                 `protobuf:"bytes,7,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
-type FetchPermissionResponse struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	PermissionMask uint64                 `protobuf:"varint,1,opt,name=permission_mask,json=permissionMask,proto3" json:"permission_mask,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
-}
-
-func (x *FetchPermissionResponse) Reset() {
-	*x = FetchPermissionResponse{}
+func (x *GetUserProfileResponse) Reset() {
+	*x = GetUserProfileResponse{}
 	mi := &file_user_v1_user_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *FetchPermissionResponse) String() string {
+func (x *GetUserProfileResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*FetchPermissionResponse) ProtoMessage() {}
+func (*GetUserProfileResponse) ProtoMessage() {}
 
-func (x *FetchPermissionResponse) ProtoReflect() protoreflect.Message {
+func (x *GetUserProfileResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_user_v1_user_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -105,31 +103,80 @@ func (x *FetchPermissionResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use FetchPermissionResponse.ProtoReflect.Descriptor instead.
-func (*FetchPermissionResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetUserProfileResponse.ProtoReflect.Descriptor instead.
+func (*GetUserProfileResponse) Descriptor() ([]byte, []int) {
 	return file_user_v1_user_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *FetchPermissionResponse) GetPermissionMask() uint64 {
+func (x *GetUserProfileResponse) GetUserId() string {
 	if x != nil {
-		return x.PermissionMask
+		return x.UserId
 	}
-	return 0
+	return ""
+}
+
+func (x *GetUserProfileResponse) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+func (x *GetUserProfileResponse) GetUsername() string {
+	if x != nil {
+		return x.Username
+	}
+	return ""
+}
+
+func (x *GetUserProfileResponse) GetAvatarUrl() string {
+	if x != nil {
+		return x.AvatarUrl
+	}
+	return ""
+}
+
+func (x *GetUserProfileResponse) GetBio() string {
+	if x != nil {
+		return x.Bio
+	}
+	return ""
+}
+
+func (x *GetUserProfileResponse) GetCreatedAt() string {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return ""
+}
+
+func (x *GetUserProfileResponse) GetUpdatedAt() string {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return ""
 }
 
 var File_user_v1_user_proto protoreflect.FileDescriptor
 
 const file_user_v1_user_proto_rawDesc = "" +
 	"\n" +
-	"\x12user/v1/user.proto\x12\auser.v1\"P\n" +
-	"\x16FetchPermissionRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x1d\n" +
+	"\x12user/v1/user.proto\x12\auser.v1\"0\n" +
+	"\x15GetUserProfileRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\"\xd2\x01\n" +
+	"\x16GetUserProfileResponse\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x14\n" +
+	"\x05email\x18\x02 \x01(\tR\x05email\x12\x1a\n" +
+	"\busername\x18\x03 \x01(\tR\busername\x12\x1d\n" +
 	"\n" +
-	"channel_id\x18\x02 \x01(\tR\tchannelId\"B\n" +
-	"\x17FetchPermissionResponse\x12'\n" +
-	"\x0fpermission_mask\x18\x01 \x01(\x04R\x0epermissionMask2c\n" +
-	"\vUserService\x12T\n" +
-	"\x0fFetchPermission\x12\x1f.user.v1.FetchPermissionRequest\x1a .user.v1.FetchPermissionResponseB:Z8github.com/sudo-odner/minor-shared/pkg/pb/user/v1;userv1b\x06proto3"
+	"avatar_url\x18\x04 \x01(\tR\tavatarUrl\x12\x10\n" +
+	"\x03bio\x18\x05 \x01(\tR\x03bio\x12\x1d\n" +
+	"\n" +
+	"created_at\x18\x06 \x01(\tR\tcreatedAt\x12\x1d\n" +
+	"\n" +
+	"updated_at\x18\a \x01(\tR\tupdatedAt2`\n" +
+	"\vUserService\x12Q\n" +
+	"\x0eGetUserProfile\x12\x1e.user.v1.GetUserProfileRequest\x1a\x1f.user.v1.GetUserProfileResponseB:Z8github.com/sudo-odner/minor-shared/pkg/pb/user/v1;userv1b\x06proto3"
 
 var (
 	file_user_v1_user_proto_rawDescOnce sync.Once
@@ -145,12 +192,12 @@ func file_user_v1_user_proto_rawDescGZIP() []byte {
 
 var file_user_v1_user_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_user_v1_user_proto_goTypes = []any{
-	(*FetchPermissionRequest)(nil),  // 0: user.v1.FetchPermissionRequest
-	(*FetchPermissionResponse)(nil), // 1: user.v1.FetchPermissionResponse
+	(*GetUserProfileRequest)(nil),  // 0: user.v1.GetUserProfileRequest
+	(*GetUserProfileResponse)(nil), // 1: user.v1.GetUserProfileResponse
 }
 var file_user_v1_user_proto_depIdxs = []int32{
-	0, // 0: user.v1.UserService.FetchPermission:input_type -> user.v1.FetchPermissionRequest
-	1, // 1: user.v1.UserService.FetchPermission:output_type -> user.v1.FetchPermissionResponse
+	0, // 0: user.v1.UserService.GetUserProfile:input_type -> user.v1.GetUserProfileRequest
+	1, // 1: user.v1.UserService.GetUserProfile:output_type -> user.v1.GetUserProfileResponse
 	1, // [1:2] is the sub-list for method output_type
 	0, // [0:1] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name

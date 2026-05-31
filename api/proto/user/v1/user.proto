@@ -5,14 +5,19 @@ package user.v1;
 option go_package = "github.com/sudo-odner/minor-shared/pkg/pb/user/v1;userv1";
 
 service UserService {
-  rpc FetchPermission(FetchPermissionRequest) returns (FetchPermissionResponse);
+  rpc GetUserProfile(GetUserProfileRequest) returns (GetUserProfileResponse);
 }
 
-message FetchPermissionRequest {
+message GetUserProfileRequest {
   string user_id = 1;
-  string channel_id = 2;
 }
 
-message FetchPermissionResponse {
-  uint64 permission_mask = 1;
+message GetUserProfileResponse {
+  string user_id = 1;
+  string email = 2;
+  string username = 3;
+  string avatar_url = 4;
+  string bio = 5;
+  string created_at = 6;
+  string updated_at = 7;
 }

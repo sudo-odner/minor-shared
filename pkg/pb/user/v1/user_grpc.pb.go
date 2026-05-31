@@ -19,14 +19,14 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	UserService_FetchPermission_FullMethodName = "/user.v1.UserService/FetchPermission"
+	UserService_GetUserProfile_FullMethodName = "/user.v1.UserService/GetUserProfile"
 )
 
 // UserServiceClient is the client API for UserService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type UserServiceClient interface {
-	FetchPermission(ctx context.Context, in *FetchPermissionRequest, opts ...grpc.CallOption) (*FetchPermissionResponse, error)
+	GetUserProfile(ctx context.Context, in *GetUserProfileRequest, opts ...grpc.CallOption) (*GetUserProfileResponse, error)
 }
 
 type userServiceClient struct {
@@ -37,10 +37,10 @@ func NewUserServiceClient(cc grpc.ClientConnInterface) UserServiceClient {
 	return &userServiceClient{cc}
 }
 
-func (c *userServiceClient) FetchPermission(ctx context.Context, in *FetchPermissionRequest, opts ...grpc.CallOption) (*FetchPermissionResponse, error) {
+func (c *userServiceClient) GetUserProfile(ctx context.Context, in *GetUserProfileRequest, opts ...grpc.CallOption) (*GetUserProfileResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(FetchPermissionResponse)
-	err := c.cc.Invoke(ctx, UserService_FetchPermission_FullMethodName, in, out, cOpts...)
+	out := new(GetUserProfileResponse)
+	err := c.cc.Invoke(ctx, UserService_GetUserProfile_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ func (c *userServiceClient) FetchPermission(ctx context.Context, in *FetchPermis
 // All implementations must embed UnimplementedUserServiceServer
 // for forward compatibility.
 type UserServiceServer interface {
-	FetchPermission(context.Context, *FetchPermissionRequest) (*FetchPermissionResponse, error)
+	GetUserProfile(context.Context, *GetUserProfileRequest) (*GetUserProfileResponse, error)
 	mustEmbedUnimplementedUserServiceServer()
 }
 
@@ -62,8 +62,8 @@ type UserServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedUserServiceServer struct{}
 
-func (UnimplementedUserServiceServer) FetchPermission(context.Context, *FetchPermissionRequest) (*FetchPermissionResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method FetchPermission not implemented")
+func (UnimplementedUserServiceServer) GetUserProfile(context.Context, *GetUserProfileRequest) (*GetUserProfileResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetUserProfile not implemented")
 }
 func (UnimplementedUserServiceServer) mustEmbedUnimplementedUserServiceServer() {}
 func (UnimplementedUserServiceServer) testEmbeddedByValue()                     {}
@@ -86,20 +86,20 @@ func RegisterUserServiceServer(s grpc.ServiceRegistrar, srv UserServiceServer) {
 	s.RegisterService(&UserService_ServiceDesc, srv)
 }
 
-func _UserService_FetchPermission_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(FetchPermissionRequest)
+func _UserService_GetUserProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserProfileRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserServiceServer).FetchPermission(ctx, in)
+		return srv.(UserServiceServer).GetUserProfile(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: UserService_FetchPermission_FullMethodName,
+		FullMethod: UserService_GetUserProfile_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServiceServer).FetchPermission(ctx, req.(*FetchPermissionRequest))
+		return srv.(UserServiceServer).GetUserProfile(ctx, req.(*GetUserProfileRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -112,8 +112,8 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*UserServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "FetchPermission",
-			Handler:    _UserService_FetchPermission_Handler,
+			MethodName: "GetUserProfile",
+			Handler:    _UserService_GetUserProfile_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
