@@ -14,6 +14,7 @@ type UserLoginSuccessEvent struct {
 type UserRegisteredEvent struct {
 	UserID    string    `json:"user_id"` // UUID v7
 	Email     string    `json:"email"`
+	Username  string    `json:"username"`
 	Timestamp time.Time `json:"timestamp"`
 }
 
