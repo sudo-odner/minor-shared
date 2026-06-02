@@ -8,6 +8,7 @@ service UserService {
   rpc GetUserName(GetUserNameRequest) returns (GetUserNameResponse);
   rpc GetUserEmail(GetUserEmailRequest) returns (GetUserEmailResponse);
   rpc GetUserProfile(GetUserProfileRequest) returns (GetUserProfileResponse);
+  rpc GetBatchProfiles(GetBatchProfilesRequest) returns (GetBatchProfilesResponse);
 }
 
 message GetUserNameRequest {
@@ -38,4 +39,18 @@ message GetUserProfileResponse {
   string bio = 5;
   string created_at = 6;
   string updated_at = 7;
+}
+
+message GetBatchProfilesRequest {
+  repeated string user_ids = 1;
+}
+
+message UserProfile {
+  string id = 1;
+  string username = 2;
+  string avatar_url = 3;
+}
+
+message GetBatchProfilesResponse {
+  map<string, UserProfile> profiles = 1; // ID -> Профиль
 }

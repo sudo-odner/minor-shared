@@ -19,9 +19,10 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	UserService_GetUserName_FullMethodName    = "/user.v1.UserService/GetUserName"
-	UserService_GetUserEmail_FullMethodName   = "/user.v1.UserService/GetUserEmail"
-	UserService_GetUserProfile_FullMethodName = "/user.v1.UserService/GetUserProfile"
+	UserService_GetUserName_FullMethodName      = "/user.v1.UserService/GetUserName"
+	UserService_GetUserEmail_FullMethodName     = "/user.v1.UserService/GetUserEmail"
+	UserService_GetUserProfile_FullMethodName   = "/user.v1.UserService/GetUserProfile"
+	UserService_GetBatchProfiles_FullMethodName = "/user.v1.UserService/GetBatchProfiles"
 )
 
 // UserServiceClient is the client API for UserService service.
@@ -31,6 +32,7 @@ type UserServiceClient interface {
 	GetUserName(ctx context.Context, in *GetUserNameRequest, opts ...grpc.CallOption) (*GetUserNameResponse, error)
 	GetUserEmail(ctx context.Context, in *GetUserEmailRequest, opts ...grpc.CallOption) (*GetUserEmailResponse, error)
 	GetUserProfile(ctx context.Context, in *GetUserProfileRequest, opts ...grpc.CallOption) (*GetUserProfileResponse, error)
+	GetBatchProfiles(ctx context.Context, in *GetBatchProfilesRequest, opts ...grpc.CallOption) (*GetBatchProfilesResponse, error)
 }
 
 type userServiceClient struct {
@@ -71,6 +73,16 @@ func (c *userServiceClient) GetUserProfile(ctx context.Context, in *GetUserProfi
 	return out, nil
 }
 
+func (c *userServiceClient) GetBatchProfiles(ctx context.Context, in *GetBatchProfilesRequest, opts ...grpc.CallOption) (*GetBatchProfilesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetBatchProfilesResponse)
+	err := c.cc.Invoke(ctx, UserService_GetBatchProfiles_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServiceServer is the server API for UserService service.
 // All implementations must embed UnimplementedUserServiceServer
 // for forward compatibility.
@@ -78,6 +90,7 @@ type UserServiceServer interface {
 	GetUserName(context.Context, *GetUserNameRequest) (*GetUserNameResponse, error)
 	GetUserEmail(context.Context, *GetUserEmailRequest) (*GetUserEmailResponse, error)
 	GetUserProfile(context.Context, *GetUserProfileRequest) (*GetUserProfileResponse, error)
+	GetBatchProfiles(context.Context, *GetBatchProfilesRequest) (*GetBatchProfilesResponse, error)
 	mustEmbedUnimplementedUserServiceServer()
 }
 
@@ -96,6 +109,9 @@ func (UnimplementedUserServiceServer) GetUserEmail(context.Context, *GetUserEmai
 }
 func (UnimplementedUserServiceServer) GetUserProfile(context.Context, *GetUserProfileRequest) (*GetUserProfileResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetUserProfile not implemented")
+}
+func (UnimplementedUserServiceServer) GetBatchProfiles(context.Context, *GetBatchProfilesRequest) (*GetBatchProfilesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetBatchProfiles not implemented")
 }
 func (UnimplementedUserServiceServer) mustEmbedUnimplementedUserServiceServer() {}
 func (UnimplementedUserServiceServer) testEmbeddedByValue()                     {}
@@ -172,6 +188,24 @@ func _UserService_GetUserProfile_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _UserService_GetBatchProfiles_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBatchProfilesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).GetBatchProfiles(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_GetBatchProfiles_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).GetBatchProfiles(ctx, req.(*GetBatchProfilesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // UserService_ServiceDesc is the grpc.ServiceDesc for UserService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -190,6 +224,10 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUserProfile",
 			Handler:    _UserService_GetUserProfile_Handler,
+		},
+		{
+			MethodName: "GetBatchProfiles",
+			Handler:    _UserService_GetBatchProfiles_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
