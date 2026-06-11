@@ -23,3 +23,10 @@ type UserLoggedOutEvent struct {
 	TokenID   string    `json:"token_id"` // UUID рефреш-токена, который был удален
 	Timestamp time.Time `json:"timestamp"`
 }
+
+type PasswordResetRequestedEvent struct {
+	Email     string    `json:"email"`
+	Code      string    `json:"code"`     // OTP
+	Username  string    `json:"username"`
+	Timestamp time.Time `json:"timestamp"`
+}
