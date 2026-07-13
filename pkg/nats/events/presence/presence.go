@@ -1,4 +1,4 @@
-package presence
+package events
 
 type PresenceStatusUpdatedEvent struct {
 	UserID       string `json:"user_id"`

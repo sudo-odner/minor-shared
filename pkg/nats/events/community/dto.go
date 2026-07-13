@@ -1,1 +1,1 @@
-package community
+package events
