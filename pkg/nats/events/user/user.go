@@ -1,4 +1,4 @@
-package events
+package user
 
 type UserCreatedEvent struct {
 	UserID   string `json:"user_id"`
