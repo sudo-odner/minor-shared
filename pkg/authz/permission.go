@@ -3,16 +3,13 @@ package authz
 type Permission uint64
 
 const (
-	// Текстовые права
+	// Base rules
+	PermViewChannel Permission = 1 << 0 // View channel / read history
 
-	// PermReadChat Позволяет просматривать чат
-	PermReadChat Permission = 1 << 0
-
-	// PermSendMessages Позволяет отправлять любой контент: текст, вложения, глосовые
-	PermSendMessages Permission = 1 << 2
-
-	// PermModerateChat Позволяет управлять чатам: удалять сообщения(в том числе не свои)
-	PermModerateChat Permission = 1 << 2
+	// Text channel
+	PermSendMessages  Permission = 1 << 5 // Send/edit/delete your message
+	PermAttachFiles   Permission = 1 << 6 // Attach files/image
+	PermMenageMessage Permission = 1 << 7 // [Modereate] Can delete all message in channel
 
 	// Голосовые права
 
@@ -46,12 +43,12 @@ const (
 	PermManageRole Permission = 1 << 23
 )
 
-// Проверка прав доступа по одному из критериев
+// Has verification based on all of the criteria
 func Has(mask, perm Permission) bool {
 	return (mask & perm) == perm
 }
 
-// Проверка прав доступа по всем perms(если все права есть)
+// HasAll verification based on all of the criteria
 func HasAll(mask Permission, perms ...Permission) bool {
 	var required Permission
 	for _, p := range perms {
@@ -60,8 +57,8 @@ func HasAll(mask Permission, perms ...Permission) bool {
 	return (mask & required) == required
 }
 
-// Провкрка прав доступа по всем perm(если хотябы один есть)
-func HashAny(mask Permission, perms ...Permission) bool {
+// HasAny verification based on one of the criteria
+func HasAny(mask Permission, perms ...Permission) bool {
 	for _, p := range perms {
 		if (mask & p) == p {
 			return true
