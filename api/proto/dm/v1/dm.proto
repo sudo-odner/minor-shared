@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-package relationship.v1;
+package dm.v1;
 
-option go_package = "github.com/sudo-odner/minor-shared/pkg/pb/relationship/v1;relationshipv1";
+option go_package = "github.com/sudo-odner/minor-shared/pkg/pb/dm/v1;dmv1";
 
-service RelationshipService {
+service DMService {
   rpc FetchPermission(FetchPermissionRequest) returns (FetchPermissionResponse);
 }
 
