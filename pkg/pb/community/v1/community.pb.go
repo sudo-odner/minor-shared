@@ -21,6 +21,94 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type CheckChannelExistsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ChannelId     string                 `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CheckChannelExistsRequest) Reset() {
+	*x = CheckChannelExistsRequest{}
+	mi := &file_community_v1_community_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CheckChannelExistsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CheckChannelExistsRequest) ProtoMessage() {}
+
+func (x *CheckChannelExistsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_community_v1_community_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CheckChannelExistsRequest.ProtoReflect.Descriptor instead.
+func (*CheckChannelExistsRequest) Descriptor() ([]byte, []int) {
+	return file_community_v1_community_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *CheckChannelExistsRequest) GetChannelId() string {
+	if x != nil {
+		return x.ChannelId
+	}
+	return ""
+}
+
+type CheckChannelExistsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Exists        bool                   `protobuf:"varint,1,opt,name=exists,proto3" json:"exists,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CheckChannelExistsResponse) Reset() {
+	*x = CheckChannelExistsResponse{}
+	mi := &file_community_v1_community_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CheckChannelExistsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CheckChannelExistsResponse) ProtoMessage() {}
+
+func (x *CheckChannelExistsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_community_v1_community_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CheckChannelExistsResponse.ProtoReflect.Descriptor instead.
+func (*CheckChannelExistsResponse) Descriptor() ([]byte, []int) {
+	return file_community_v1_community_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *CheckChannelExistsResponse) GetExists() bool {
+	if x != nil {
+		return x.Exists
+	}
+	return false
+}
+
 type FetchPermissionRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
@@ -31,7 +119,7 @@ type FetchPermissionRequest struct {
 
 func (x *FetchPermissionRequest) Reset() {
 	*x = FetchPermissionRequest{}
-	mi := &file_community_v1_community_proto_msgTypes[0]
+	mi := &file_community_v1_community_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -43,7 +131,7 @@ func (x *FetchPermissionRequest) String() string {
 func (*FetchPermissionRequest) ProtoMessage() {}
 
 func (x *FetchPermissionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_community_v1_community_proto_msgTypes[0]
+	mi := &file_community_v1_community_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -56,7 +144,7 @@ func (x *FetchPermissionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FetchPermissionRequest.ProtoReflect.Descriptor instead.
 func (*FetchPermissionRequest) Descriptor() ([]byte, []int) {
-	return file_community_v1_community_proto_rawDescGZIP(), []int{0}
+	return file_community_v1_community_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *FetchPermissionRequest) GetUserId() string {
@@ -82,7 +170,7 @@ type FetchPermissionResponse struct {
 
 func (x *FetchPermissionResponse) Reset() {
 	*x = FetchPermissionResponse{}
-	mi := &file_community_v1_community_proto_msgTypes[1]
+	mi := &file_community_v1_community_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -94,7 +182,7 @@ func (x *FetchPermissionResponse) String() string {
 func (*FetchPermissionResponse) ProtoMessage() {}
 
 func (x *FetchPermissionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_community_v1_community_proto_msgTypes[1]
+	mi := &file_community_v1_community_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -107,7 +195,7 @@ func (x *FetchPermissionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FetchPermissionResponse.ProtoReflect.Descriptor instead.
 func (*FetchPermissionResponse) Descriptor() ([]byte, []int) {
-	return file_community_v1_community_proto_rawDescGZIP(), []int{1}
+	return file_community_v1_community_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *FetchPermissionResponse) GetPermissionMask() uint64 {
@@ -121,14 +209,20 @@ var File_community_v1_community_proto protoreflect.FileDescriptor
 
 const file_community_v1_community_proto_rawDesc = "" +
 	"\n" +
-	"\x1ccommunity/v1/community.proto\x12\fcommunity.v1\"P\n" +
+	"\x1ccommunity/v1/community.proto\x12\fcommunity.v1\":\n" +
+	"\x19CheckChannelExistsRequest\x12\x1d\n" +
+	"\n" +
+	"channel_id\x18\x01 \x01(\tR\tchannelId\"4\n" +
+	"\x1aCheckChannelExistsResponse\x12\x16\n" +
+	"\x06exists\x18\x01 \x01(\bR\x06exists\"P\n" +
 	"\x16FetchPermissionRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x1d\n" +
 	"\n" +
 	"channel_id\x18\x02 \x01(\tR\tchannelId\"B\n" +
 	"\x17FetchPermissionResponse\x12'\n" +
-	"\x0fpermission_mask\x18\x01 \x01(\x04R\x0epermissionMask2r\n" +
-	"\x10CommunityService\x12^\n" +
+	"\x0fpermission_mask\x18\x01 \x01(\x04R\x0epermissionMask2\xdb\x01\n" +
+	"\x10CommunityService\x12g\n" +
+	"\x12CheckChannelExists\x12'.community.v1.CheckChannelExistsRequest\x1a(.community.v1.CheckChannelExistsResponse\x12^\n" +
 	"\x0fFetchPermission\x12$.community.v1.FetchPermissionRequest\x1a%.community.v1.FetchPermissionResponseBDZBgithub.com/sudo-odner/minor-shared/pkg/pb/community/v1;communityv1b\x06proto3"
 
 var (
@@ -143,16 +237,20 @@ func file_community_v1_community_proto_rawDescGZIP() []byte {
 	return file_community_v1_community_proto_rawDescData
 }
 
-var file_community_v1_community_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_community_v1_community_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_community_v1_community_proto_goTypes = []any{
-	(*FetchPermissionRequest)(nil),  // 0: community.v1.FetchPermissionRequest
-	(*FetchPermissionResponse)(nil), // 1: community.v1.FetchPermissionResponse
+	(*CheckChannelExistsRequest)(nil),  // 0: community.v1.CheckChannelExistsRequest
+	(*CheckChannelExistsResponse)(nil), // 1: community.v1.CheckChannelExistsResponse
+	(*FetchPermissionRequest)(nil),     // 2: community.v1.FetchPermissionRequest
+	(*FetchPermissionResponse)(nil),    // 3: community.v1.FetchPermissionResponse
 }
 var file_community_v1_community_proto_depIdxs = []int32{
-	0, // 0: community.v1.CommunityService.FetchPermission:input_type -> community.v1.FetchPermissionRequest
-	1, // 1: community.v1.CommunityService.FetchPermission:output_type -> community.v1.FetchPermissionResponse
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
+	0, // 0: community.v1.CommunityService.CheckChannelExists:input_type -> community.v1.CheckChannelExistsRequest
+	2, // 1: community.v1.CommunityService.FetchPermission:input_type -> community.v1.FetchPermissionRequest
+	1, // 2: community.v1.CommunityService.CheckChannelExists:output_type -> community.v1.CheckChannelExistsResponse
+	3, // 3: community.v1.CommunityService.FetchPermission:output_type -> community.v1.FetchPermissionResponse
+	2, // [2:4] is the sub-list for method output_type
+	0, // [0:2] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -169,7 +267,7 @@ func file_community_v1_community_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_community_v1_community_proto_rawDesc), len(file_community_v1_community_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

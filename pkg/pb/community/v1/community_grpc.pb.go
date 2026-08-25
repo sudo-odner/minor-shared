@@ -19,13 +19,15 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	CommunityService_FetchPermission_FullMethodName = "/community.v1.CommunityService/FetchPermission"
+	CommunityService_CheckChannelExists_FullMethodName = "/community.v1.CommunityService/CheckChannelExists"
+	CommunityService_FetchPermission_FullMethodName    = "/community.v1.CommunityService/FetchPermission"
 )
 
 // CommunityServiceClient is the client API for CommunityService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type CommunityServiceClient interface {
+	CheckChannelExists(ctx context.Context, in *CheckChannelExistsRequest, opts ...grpc.CallOption) (*CheckChannelExistsResponse, error)
 	FetchPermission(ctx context.Context, in *FetchPermissionRequest, opts ...grpc.CallOption) (*FetchPermissionResponse, error)
 }
 
@@ -35,6 +37,16 @@ type communityServiceClient struct {
 
 func NewCommunityServiceClient(cc grpc.ClientConnInterface) CommunityServiceClient {
 	return &communityServiceClient{cc}
+}
+
+func (c *communityServiceClient) CheckChannelExists(ctx context.Context, in *CheckChannelExistsRequest, opts ...grpc.CallOption) (*CheckChannelExistsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CheckChannelExistsResponse)
+	err := c.cc.Invoke(ctx, CommunityService_CheckChannelExists_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *communityServiceClient) FetchPermission(ctx context.Context, in *FetchPermissionRequest, opts ...grpc.CallOption) (*FetchPermissionResponse, error) {
@@ -51,6 +63,7 @@ func (c *communityServiceClient) FetchPermission(ctx context.Context, in *FetchP
 // All implementations must embed UnimplementedCommunityServiceServer
 // for forward compatibility.
 type CommunityServiceServer interface {
+	CheckChannelExists(context.Context, *CheckChannelExistsRequest) (*CheckChannelExistsResponse, error)
 	FetchPermission(context.Context, *FetchPermissionRequest) (*FetchPermissionResponse, error)
 	mustEmbedUnimplementedCommunityServiceServer()
 }
@@ -62,6 +75,9 @@ type CommunityServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedCommunityServiceServer struct{}
 
+func (UnimplementedCommunityServiceServer) CheckChannelExists(context.Context, *CheckChannelExistsRequest) (*CheckChannelExistsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CheckChannelExists not implemented")
+}
 func (UnimplementedCommunityServiceServer) FetchPermission(context.Context, *FetchPermissionRequest) (*FetchPermissionResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method FetchPermission not implemented")
 }
@@ -84,6 +100,24 @@ func RegisterCommunityServiceServer(s grpc.ServiceRegistrar, srv CommunityServic
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&CommunityService_ServiceDesc, srv)
+}
+
+func _CommunityService_CheckChannelExists_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CheckChannelExistsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CommunityServiceServer).CheckChannelExists(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CommunityService_CheckChannelExists_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CommunityServiceServer).CheckChannelExists(ctx, req.(*CheckChannelExistsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _CommunityService_FetchPermission_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -111,6 +145,10 @@ var CommunityService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "community.v1.CommunityService",
 	HandlerType: (*CommunityServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "CheckChannelExists",
+			Handler:    _CommunityService_CheckChannelExists_Handler,
+		},
 		{
 			MethodName: "FetchPermission",
 			Handler:    _CommunityService_FetchPermission_Handler,
