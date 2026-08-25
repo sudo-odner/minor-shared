@@ -5,7 +5,16 @@ package dm.v1;
 option go_package = "github.com/sudo-odner/minor-shared/pkg/pb/dm/v1;dmv1";
 
 service DMService {
+  rpc CheckChannelExists(CheckChannelExistsRequest) returns (CheckChannelExistsResponse);
   rpc FetchPermission(FetchPermissionRequest) returns (FetchPermissionResponse);
+}
+
+message CheckChannelExistsRequest {
+  string channel_id = 1;
+}
+
+message CheckChannelExistsResponse {
+  bool exists = 1;
 }
 
 message FetchPermissionRequest {
