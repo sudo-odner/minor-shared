@@ -4,24 +4,24 @@ package community.v1;
 
 option go_package = "github.com/sudo-odner/minor-shared/pkg/pb/community/v1;communityv1";
 
-service CommunityService {
-  rpc CheckChannelExists(CheckChannelExistsRequest) returns (CheckChannelExistsResponse);
+service DMService {
   rpc FetchPermission(FetchPermissionRequest) returns (FetchPermissionResponse);
-}
-
-message CheckChannelExistsRequest {
-  string channel_id = 1;
-}
-
-message CheckChannelExistsResponse {
-  bool exists = 1;
+  rpc FetchMembers(FetchMembersRequest) returns (FetchMembersResponse);
 }
 
 message FetchPermissionRequest {
-  string user_id = 1;
-  string channel_id = 2;
+  bytes user_id = 1;
+  bytes channel_id = 2;
 }
 
 message FetchPermissionResponse {
   uint64 permission_mask = 1;
+}
+
+message FetchMembersRequest {
+  bytes channel_id = 1;
+}
+
+message FetchMembersResponse {
+  repeated bytes user_ids = 1;
 }

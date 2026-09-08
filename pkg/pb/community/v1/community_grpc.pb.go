@@ -19,139 +19,139 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	CommunityService_CheckChannelExists_FullMethodName = "/community.v1.CommunityService/CheckChannelExists"
-	CommunityService_FetchPermission_FullMethodName    = "/community.v1.CommunityService/FetchPermission"
+	DMService_FetchPermission_FullMethodName = "/community.v1.DMService/FetchPermission"
+	DMService_FetchMembers_FullMethodName    = "/community.v1.DMService/FetchMembers"
 )
 
-// CommunityServiceClient is the client API for CommunityService service.
+// DMServiceClient is the client API for DMService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type CommunityServiceClient interface {
-	CheckChannelExists(ctx context.Context, in *CheckChannelExistsRequest, opts ...grpc.CallOption) (*CheckChannelExistsResponse, error)
+type DMServiceClient interface {
 	FetchPermission(ctx context.Context, in *FetchPermissionRequest, opts ...grpc.CallOption) (*FetchPermissionResponse, error)
+	FetchMembers(ctx context.Context, in *FetchMembersRequest, opts ...grpc.CallOption) (*FetchMembersResponse, error)
 }
 
-type communityServiceClient struct {
+type dMServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewCommunityServiceClient(cc grpc.ClientConnInterface) CommunityServiceClient {
-	return &communityServiceClient{cc}
+func NewDMServiceClient(cc grpc.ClientConnInterface) DMServiceClient {
+	return &dMServiceClient{cc}
 }
 
-func (c *communityServiceClient) CheckChannelExists(ctx context.Context, in *CheckChannelExistsRequest, opts ...grpc.CallOption) (*CheckChannelExistsResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CheckChannelExistsResponse)
-	err := c.cc.Invoke(ctx, CommunityService_CheckChannelExists_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *communityServiceClient) FetchPermission(ctx context.Context, in *FetchPermissionRequest, opts ...grpc.CallOption) (*FetchPermissionResponse, error) {
+func (c *dMServiceClient) FetchPermission(ctx context.Context, in *FetchPermissionRequest, opts ...grpc.CallOption) (*FetchPermissionResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(FetchPermissionResponse)
-	err := c.cc.Invoke(ctx, CommunityService_FetchPermission_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, DMService_FetchPermission_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// CommunityServiceServer is the server API for CommunityService service.
-// All implementations must embed UnimplementedCommunityServiceServer
-// for forward compatibility.
-type CommunityServiceServer interface {
-	CheckChannelExists(context.Context, *CheckChannelExistsRequest) (*CheckChannelExistsResponse, error)
-	FetchPermission(context.Context, *FetchPermissionRequest) (*FetchPermissionResponse, error)
-	mustEmbedUnimplementedCommunityServiceServer()
+func (c *dMServiceClient) FetchMembers(ctx context.Context, in *FetchMembersRequest, opts ...grpc.CallOption) (*FetchMembersResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(FetchMembersResponse)
+	err := c.cc.Invoke(ctx, DMService_FetchMembers_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
-// UnimplementedCommunityServiceServer must be embedded to have
+// DMServiceServer is the server API for DMService service.
+// All implementations must embed UnimplementedDMServiceServer
+// for forward compatibility.
+type DMServiceServer interface {
+	FetchPermission(context.Context, *FetchPermissionRequest) (*FetchPermissionResponse, error)
+	FetchMembers(context.Context, *FetchMembersRequest) (*FetchMembersResponse, error)
+	mustEmbedUnimplementedDMServiceServer()
+}
+
+// UnimplementedDMServiceServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedCommunityServiceServer struct{}
+type UnimplementedDMServiceServer struct{}
 
-func (UnimplementedCommunityServiceServer) CheckChannelExists(context.Context, *CheckChannelExistsRequest) (*CheckChannelExistsResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method CheckChannelExists not implemented")
-}
-func (UnimplementedCommunityServiceServer) FetchPermission(context.Context, *FetchPermissionRequest) (*FetchPermissionResponse, error) {
+func (UnimplementedDMServiceServer) FetchPermission(context.Context, *FetchPermissionRequest) (*FetchPermissionResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method FetchPermission not implemented")
 }
-func (UnimplementedCommunityServiceServer) mustEmbedUnimplementedCommunityServiceServer() {}
-func (UnimplementedCommunityServiceServer) testEmbeddedByValue()                          {}
+func (UnimplementedDMServiceServer) FetchMembers(context.Context, *FetchMembersRequest) (*FetchMembersResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method FetchMembers not implemented")
+}
+func (UnimplementedDMServiceServer) mustEmbedUnimplementedDMServiceServer() {}
+func (UnimplementedDMServiceServer) testEmbeddedByValue()                   {}
 
-// UnsafeCommunityServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to CommunityServiceServer will
+// UnsafeDMServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to DMServiceServer will
 // result in compilation errors.
-type UnsafeCommunityServiceServer interface {
-	mustEmbedUnimplementedCommunityServiceServer()
+type UnsafeDMServiceServer interface {
+	mustEmbedUnimplementedDMServiceServer()
 }
 
-func RegisterCommunityServiceServer(s grpc.ServiceRegistrar, srv CommunityServiceServer) {
-	// If the following call panics, it indicates UnimplementedCommunityServiceServer was
+func RegisterDMServiceServer(s grpc.ServiceRegistrar, srv DMServiceServer) {
+	// If the following call panics, it indicates UnimplementedDMServiceServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&CommunityService_ServiceDesc, srv)
+	s.RegisterService(&DMService_ServiceDesc, srv)
 }
 
-func _CommunityService_CheckChannelExists_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CheckChannelExistsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CommunityServiceServer).CheckChannelExists(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: CommunityService_CheckChannelExists_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CommunityServiceServer).CheckChannelExists(ctx, req.(*CheckChannelExistsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _CommunityService_FetchPermission_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _DMService_FetchPermission_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(FetchPermissionRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CommunityServiceServer).FetchPermission(ctx, in)
+		return srv.(DMServiceServer).FetchPermission(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: CommunityService_FetchPermission_FullMethodName,
+		FullMethod: DMService_FetchPermission_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CommunityServiceServer).FetchPermission(ctx, req.(*FetchPermissionRequest))
+		return srv.(DMServiceServer).FetchPermission(ctx, req.(*FetchPermissionRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// CommunityService_ServiceDesc is the grpc.ServiceDesc for CommunityService service.
+func _DMService_FetchMembers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FetchMembersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DMServiceServer).FetchMembers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DMService_FetchMembers_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DMServiceServer).FetchMembers(ctx, req.(*FetchMembersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// DMService_ServiceDesc is the grpc.ServiceDesc for DMService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var CommunityService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "community.v1.CommunityService",
-	HandlerType: (*CommunityServiceServer)(nil),
+var DMService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "community.v1.DMService",
+	HandlerType: (*DMServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "CheckChannelExists",
-			Handler:    _CommunityService_CheckChannelExists_Handler,
+			MethodName: "FetchPermission",
+			Handler:    _DMService_FetchPermission_Handler,
 		},
 		{
-			MethodName: "FetchPermission",
-			Handler:    _CommunityService_FetchPermission_Handler,
+			MethodName: "FetchMembers",
+			Handler:    _DMService_FetchMembers_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
