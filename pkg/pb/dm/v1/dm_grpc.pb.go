@@ -19,16 +19,16 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	DMService_CheckChannelExists_FullMethodName = "/dm.v1.DMService/CheckChannelExists"
-	DMService_FetchPermission_FullMethodName    = "/dm.v1.DMService/FetchPermission"
+	DMService_FetchPermission_FullMethodName = "/dm.v1.DMService/FetchPermission"
+	DMService_FetchMembers_FullMethodName    = "/dm.v1.DMService/FetchMembers"
 )
 
 // DMServiceClient is the client API for DMService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type DMServiceClient interface {
-	CheckChannelExists(ctx context.Context, in *CheckChannelExistsRequest, opts ...grpc.CallOption) (*CheckChannelExistsResponse, error)
 	FetchPermission(ctx context.Context, in *FetchPermissionRequest, opts ...grpc.CallOption) (*FetchPermissionResponse, error)
+	FetchMembers(ctx context.Context, in *FetchMembersRequest, opts ...grpc.CallOption) (*FetchMembersResponse, error)
 }
 
 type dMServiceClient struct {
@@ -37,16 +37,6 @@ type dMServiceClient struct {
 
 func NewDMServiceClient(cc grpc.ClientConnInterface) DMServiceClient {
 	return &dMServiceClient{cc}
-}
-
-func (c *dMServiceClient) CheckChannelExists(ctx context.Context, in *CheckChannelExistsRequest, opts ...grpc.CallOption) (*CheckChannelExistsResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CheckChannelExistsResponse)
-	err := c.cc.Invoke(ctx, DMService_CheckChannelExists_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
 }
 
 func (c *dMServiceClient) FetchPermission(ctx context.Context, in *FetchPermissionRequest, opts ...grpc.CallOption) (*FetchPermissionResponse, error) {
@@ -59,12 +49,22 @@ func (c *dMServiceClient) FetchPermission(ctx context.Context, in *FetchPermissi
 	return out, nil
 }
 
+func (c *dMServiceClient) FetchMembers(ctx context.Context, in *FetchMembersRequest, opts ...grpc.CallOption) (*FetchMembersResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(FetchMembersResponse)
+	err := c.cc.Invoke(ctx, DMService_FetchMembers_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // DMServiceServer is the server API for DMService service.
 // All implementations must embed UnimplementedDMServiceServer
 // for forward compatibility.
 type DMServiceServer interface {
-	CheckChannelExists(context.Context, *CheckChannelExistsRequest) (*CheckChannelExistsResponse, error)
 	FetchPermission(context.Context, *FetchPermissionRequest) (*FetchPermissionResponse, error)
+	FetchMembers(context.Context, *FetchMembersRequest) (*FetchMembersResponse, error)
 	mustEmbedUnimplementedDMServiceServer()
 }
 
@@ -75,11 +75,11 @@ type DMServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedDMServiceServer struct{}
 
-func (UnimplementedDMServiceServer) CheckChannelExists(context.Context, *CheckChannelExistsRequest) (*CheckChannelExistsResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method CheckChannelExists not implemented")
-}
 func (UnimplementedDMServiceServer) FetchPermission(context.Context, *FetchPermissionRequest) (*FetchPermissionResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method FetchPermission not implemented")
+}
+func (UnimplementedDMServiceServer) FetchMembers(context.Context, *FetchMembersRequest) (*FetchMembersResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method FetchMembers not implemented")
 }
 func (UnimplementedDMServiceServer) mustEmbedUnimplementedDMServiceServer() {}
 func (UnimplementedDMServiceServer) testEmbeddedByValue()                   {}
@@ -102,24 +102,6 @@ func RegisterDMServiceServer(s grpc.ServiceRegistrar, srv DMServiceServer) {
 	s.RegisterService(&DMService_ServiceDesc, srv)
 }
 
-func _DMService_CheckChannelExists_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CheckChannelExistsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(DMServiceServer).CheckChannelExists(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: DMService_CheckChannelExists_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DMServiceServer).CheckChannelExists(ctx, req.(*CheckChannelExistsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _DMService_FetchPermission_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(FetchPermissionRequest)
 	if err := dec(in); err != nil {
@@ -138,6 +120,24 @@ func _DMService_FetchPermission_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _DMService_FetchMembers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FetchMembersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DMServiceServer).FetchMembers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DMService_FetchMembers_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DMServiceServer).FetchMembers(ctx, req.(*FetchMembersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // DMService_ServiceDesc is the grpc.ServiceDesc for DMService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -146,12 +146,12 @@ var DMService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*DMServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "CheckChannelExists",
-			Handler:    _DMService_CheckChannelExists_Handler,
-		},
-		{
 			MethodName: "FetchPermission",
 			Handler:    _DMService_FetchPermission_Handler,
+		},
+		{
+			MethodName: "FetchMembers",
+			Handler:    _DMService_FetchMembers_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

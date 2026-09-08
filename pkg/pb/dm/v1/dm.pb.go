@@ -21,105 +21,17 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type CheckChannelExistsRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ChannelId     string                 `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *CheckChannelExistsRequest) Reset() {
-	*x = CheckChannelExistsRequest{}
-	mi := &file_dm_v1_dm_proto_msgTypes[0]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CheckChannelExistsRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CheckChannelExistsRequest) ProtoMessage() {}
-
-func (x *CheckChannelExistsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_dm_v1_dm_proto_msgTypes[0]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CheckChannelExistsRequest.ProtoReflect.Descriptor instead.
-func (*CheckChannelExistsRequest) Descriptor() ([]byte, []int) {
-	return file_dm_v1_dm_proto_rawDescGZIP(), []int{0}
-}
-
-func (x *CheckChannelExistsRequest) GetChannelId() string {
-	if x != nil {
-		return x.ChannelId
-	}
-	return ""
-}
-
-type CheckChannelExistsResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Exists        bool                   `protobuf:"varint,1,opt,name=exists,proto3" json:"exists,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *CheckChannelExistsResponse) Reset() {
-	*x = CheckChannelExistsResponse{}
-	mi := &file_dm_v1_dm_proto_msgTypes[1]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CheckChannelExistsResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CheckChannelExistsResponse) ProtoMessage() {}
-
-func (x *CheckChannelExistsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_dm_v1_dm_proto_msgTypes[1]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CheckChannelExistsResponse.ProtoReflect.Descriptor instead.
-func (*CheckChannelExistsResponse) Descriptor() ([]byte, []int) {
-	return file_dm_v1_dm_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *CheckChannelExistsResponse) GetExists() bool {
-	if x != nil {
-		return x.Exists
-	}
-	return false
-}
-
 type FetchPermissionRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	ChannelId     string                 `protobuf:"bytes,2,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
+	UserId        []byte                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	ChannelId     []byte                 `protobuf:"bytes,2,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *FetchPermissionRequest) Reset() {
 	*x = FetchPermissionRequest{}
-	mi := &file_dm_v1_dm_proto_msgTypes[2]
+	mi := &file_dm_v1_dm_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -131,7 +43,7 @@ func (x *FetchPermissionRequest) String() string {
 func (*FetchPermissionRequest) ProtoMessage() {}
 
 func (x *FetchPermissionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_dm_v1_dm_proto_msgTypes[2]
+	mi := &file_dm_v1_dm_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -144,21 +56,21 @@ func (x *FetchPermissionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FetchPermissionRequest.ProtoReflect.Descriptor instead.
 func (*FetchPermissionRequest) Descriptor() ([]byte, []int) {
-	return file_dm_v1_dm_proto_rawDescGZIP(), []int{2}
+	return file_dm_v1_dm_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *FetchPermissionRequest) GetUserId() string {
+func (x *FetchPermissionRequest) GetUserId() []byte {
 	if x != nil {
 		return x.UserId
 	}
-	return ""
+	return nil
 }
 
-func (x *FetchPermissionRequest) GetChannelId() string {
+func (x *FetchPermissionRequest) GetChannelId() []byte {
 	if x != nil {
 		return x.ChannelId
 	}
-	return ""
+	return nil
 }
 
 type FetchPermissionResponse struct {
@@ -170,7 +82,7 @@ type FetchPermissionResponse struct {
 
 func (x *FetchPermissionResponse) Reset() {
 	*x = FetchPermissionResponse{}
-	mi := &file_dm_v1_dm_proto_msgTypes[3]
+	mi := &file_dm_v1_dm_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -182,7 +94,7 @@ func (x *FetchPermissionResponse) String() string {
 func (*FetchPermissionResponse) ProtoMessage() {}
 
 func (x *FetchPermissionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_dm_v1_dm_proto_msgTypes[3]
+	mi := &file_dm_v1_dm_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -195,7 +107,7 @@ func (x *FetchPermissionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FetchPermissionResponse.ProtoReflect.Descriptor instead.
 func (*FetchPermissionResponse) Descriptor() ([]byte, []int) {
-	return file_dm_v1_dm_proto_rawDescGZIP(), []int{3}
+	return file_dm_v1_dm_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *FetchPermissionResponse) GetPermissionMask() uint64 {
@@ -205,25 +117,113 @@ func (x *FetchPermissionResponse) GetPermissionMask() uint64 {
 	return 0
 }
 
+type FetchMembersRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ChannelId     []byte                 `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *FetchMembersRequest) Reset() {
+	*x = FetchMembersRequest{}
+	mi := &file_dm_v1_dm_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *FetchMembersRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FetchMembersRequest) ProtoMessage() {}
+
+func (x *FetchMembersRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_dm_v1_dm_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FetchMembersRequest.ProtoReflect.Descriptor instead.
+func (*FetchMembersRequest) Descriptor() ([]byte, []int) {
+	return file_dm_v1_dm_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *FetchMembersRequest) GetChannelId() []byte {
+	if x != nil {
+		return x.ChannelId
+	}
+	return nil
+}
+
+type FetchMembersResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserIds       [][]byte               `protobuf:"bytes,1,rep,name=user_ids,json=userIds,proto3" json:"user_ids,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *FetchMembersResponse) Reset() {
+	*x = FetchMembersResponse{}
+	mi := &file_dm_v1_dm_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *FetchMembersResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FetchMembersResponse) ProtoMessage() {}
+
+func (x *FetchMembersResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_dm_v1_dm_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FetchMembersResponse.ProtoReflect.Descriptor instead.
+func (*FetchMembersResponse) Descriptor() ([]byte, []int) {
+	return file_dm_v1_dm_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *FetchMembersResponse) GetUserIds() [][]byte {
+	if x != nil {
+		return x.UserIds
+	}
+	return nil
+}
+
 var File_dm_v1_dm_proto protoreflect.FileDescriptor
 
 const file_dm_v1_dm_proto_rawDesc = "" +
 	"\n" +
-	"\x0edm/v1/dm.proto\x12\x05dm.v1\":\n" +
-	"\x19CheckChannelExistsRequest\x12\x1d\n" +
-	"\n" +
-	"channel_id\x18\x01 \x01(\tR\tchannelId\"4\n" +
-	"\x1aCheckChannelExistsResponse\x12\x16\n" +
-	"\x06exists\x18\x01 \x01(\bR\x06exists\"P\n" +
+	"\x0edm/v1/dm.proto\x12\x05dm.v1\"P\n" +
 	"\x16FetchPermissionRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x1d\n" +
+	"\auser_id\x18\x01 \x01(\fR\x06userId\x12\x1d\n" +
 	"\n" +
-	"channel_id\x18\x02 \x01(\tR\tchannelId\"B\n" +
+	"channel_id\x18\x02 \x01(\fR\tchannelId\"B\n" +
 	"\x17FetchPermissionResponse\x12'\n" +
-	"\x0fpermission_mask\x18\x01 \x01(\x04R\x0epermissionMask2\xb8\x01\n" +
-	"\tDMService\x12Y\n" +
-	"\x12CheckChannelExists\x12 .dm.v1.CheckChannelExistsRequest\x1a!.dm.v1.CheckChannelExistsResponse\x12P\n" +
-	"\x0fFetchPermission\x12\x1d.dm.v1.FetchPermissionRequest\x1a\x1e.dm.v1.FetchPermissionResponseB6Z4github.com/sudo-odner/minor-shared/pkg/pb/dm/v1;dmv1b\x06proto3"
+	"\x0fpermission_mask\x18\x01 \x01(\x04R\x0epermissionMask\"4\n" +
+	"\x13FetchMembersRequest\x12\x1d\n" +
+	"\n" +
+	"channel_id\x18\x01 \x01(\fR\tchannelId\"1\n" +
+	"\x14FetchMembersResponse\x12\x19\n" +
+	"\buser_ids\x18\x01 \x03(\fR\auserIds2\xa6\x01\n" +
+	"\tDMService\x12P\n" +
+	"\x0fFetchPermission\x12\x1d.dm.v1.FetchPermissionRequest\x1a\x1e.dm.v1.FetchPermissionResponse\x12G\n" +
+	"\fFetchMembers\x12\x1a.dm.v1.FetchMembersRequest\x1a\x1b.dm.v1.FetchMembersResponseB6Z4github.com/sudo-odner/minor-shared/pkg/pb/dm/v1;dmv1b\x06proto3"
 
 var (
 	file_dm_v1_dm_proto_rawDescOnce sync.Once
@@ -239,16 +239,16 @@ func file_dm_v1_dm_proto_rawDescGZIP() []byte {
 
 var file_dm_v1_dm_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_dm_v1_dm_proto_goTypes = []any{
-	(*CheckChannelExistsRequest)(nil),  // 0: dm.v1.CheckChannelExistsRequest
-	(*CheckChannelExistsResponse)(nil), // 1: dm.v1.CheckChannelExistsResponse
-	(*FetchPermissionRequest)(nil),     // 2: dm.v1.FetchPermissionRequest
-	(*FetchPermissionResponse)(nil),    // 3: dm.v1.FetchPermissionResponse
+	(*FetchPermissionRequest)(nil),  // 0: dm.v1.FetchPermissionRequest
+	(*FetchPermissionResponse)(nil), // 1: dm.v1.FetchPermissionResponse
+	(*FetchMembersRequest)(nil),     // 2: dm.v1.FetchMembersRequest
+	(*FetchMembersResponse)(nil),    // 3: dm.v1.FetchMembersResponse
 }
 var file_dm_v1_dm_proto_depIdxs = []int32{
-	0, // 0: dm.v1.DMService.CheckChannelExists:input_type -> dm.v1.CheckChannelExistsRequest
-	2, // 1: dm.v1.DMService.FetchPermission:input_type -> dm.v1.FetchPermissionRequest
-	1, // 2: dm.v1.DMService.CheckChannelExists:output_type -> dm.v1.CheckChannelExistsResponse
-	3, // 3: dm.v1.DMService.FetchPermission:output_type -> dm.v1.FetchPermissionResponse
+	0, // 0: dm.v1.DMService.FetchPermission:input_type -> dm.v1.FetchPermissionRequest
+	2, // 1: dm.v1.DMService.FetchMembers:input_type -> dm.v1.FetchMembersRequest
+	1, // 2: dm.v1.DMService.FetchPermission:output_type -> dm.v1.FetchPermissionResponse
+	3, // 3: dm.v1.DMService.FetchMembers:output_type -> dm.v1.FetchMembersResponse
 	2, // [2:4] is the sub-list for method output_type
 	0, // [0:2] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
