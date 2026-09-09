@@ -1,5 +1,9 @@
 package events
 
+type Event interface {
+	Subject() string
+}
+
 // Community Service NATS Subjects
 const (
 	SubjectChannelCreated          = "community.channel.created"
