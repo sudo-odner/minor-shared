@@ -3,6 +3,9 @@ package authz
 type Permission uint64
 
 const (
+	// Zero Permission
+	None Permission = 0x0
+
 	// Base rules
 	PermViewChannel Permission = 1 << 0 // View channel / read history
 
